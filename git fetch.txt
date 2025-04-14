@@ -1,0 +1,74 @@
+What is git fetch?
+git fetch downloads changes from a remote repository to your local machine, but does NOT merge them automatically into your current branch.
+
+Example:
+git fetch origin master
+This downloads the latest commits from the remote master branch to a local tracking branch called origin/master.
+
+Your working branch (like local master) does not change yet.
+
+Think of git fetch as "check what's new, but don't apply it yet."
+
+What is git pull?
+git pull is a combination of:
+
+git fetch → gets the latest changes
+
+git merge → merges them into your current branch
+
+Example:
+git pull origin master
+Downloads latest code from origin/master
+
+Merges it into your current local branch
+
+Think of git pull as "get the latest code and apply it to my branch."
+
+What is git merge?
+git merge combines the changes from one branch into your current branch.
+
+Example:
+git merge origin/master
+This will merge the remote tracking branch origin/master into your current local branch.
+
+Use it after you’ve done git fetch.
+
+Difference between git fetch, git pull, and git merge
+Command	Does it download remote changes?	Does it apply the changes to current branch?	Use Case
+git fetch	✅ Yes	❌ No	When you want to preview or inspect updates first
+git pull	✅ Yes	✅ Yes	When you want to update your local branch directly
+git merge	❌ No	✅ Yes (if another branch is already fetched)	When merging fetched changes manually
+Command Summary
+git fetch origin master
+Fetches the latest changes from the remote master branch, but doesn’t merge them into your current branch.
+
+git branch -a
+Lists all branches:
+
+Local branches
+
+Remote branches (like remotes/origin/master, etc.)
+
+git merge origin/master
+Merges the changes from origin/master (fetched version of remote branch) into your current branch.
+
+Scenario: Max Pushed a New Story
+You’re told:
+
+Max just pushed another story to remote. Let's retrieve that using the second approach.
+
+You should:
+git pull origin master
+This brings all Max’s changes from the remote master and merges them into your local master.
+
+How to Check: “What’s the name of the new story Max added?”
+After pulling the changes:
+ls
+This lists the files in your local directory.
+
+The new story will show up as a new file (e.g., fox-and-grapes.txt or story3.txt).
+
+You can also check recent commits:
+git log --name-only
+This will show commit messages and the names of files added or modified.
+

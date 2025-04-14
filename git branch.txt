@@ -1,0 +1,120 @@
+What is a Git branch?
+A Git branch is simply a pointer to a specific commit in the Git history. It helps you work on different features or fixes without affecting the main codebase.
+
+Think of a branch like a "workspace" or a "timeline" of changes.
+
+By default, Git creates a branch called main (or master) when you start a repo.
+
+You can create multiple branches for different features, bug fixes, experiments, etc.
+
+If we create a branch, is it a directory or file?
+No, a branch is not a directory or file in your Linux file system.
+
+Branches are stored as metadata inside the .git/ directory in the repo. Specifically, they’re just pointers to commits in the .git/refs/heads/ folder.
+
+That’s why you don’t see a new folder or file when you create a branch.
+
+Important Git Commands Explained
+git branch
+Lists all the local branches in the repo.
+
+Highlights the current branch with *.
+
+Example:
+git branch
+Output:
+* main
+  feature-login
+  bugfix-header
+git checkout -b <branchname>
+Creates a new branch and immediately switches to it.
+
+Example:
+git checkout -b feature-login
+Equivalent to:
+git branch feature-login
+git checkout feature-login
+git checkout <branchname>
+Switches to an existing branch.
+
+Example:
+git checkout main
+git log --name-only
+Shows the commit history, and lists only the file names that were changed in each commit.
+
+Example:
+git log --name-only
+git show
+Shows details of the latest commit on the current branch.
+
+Includes author, date, commit message, and what exactly was changed.
+
+Example:
+git show
+git status
+Shows the current state of your working directory and staging area:
+
+Files changed
+
+Files staged
+
+Untracked files
+
+Example:
+git status
+git commit -m "commit message"
+Commits only the files that are staged using git add.
+
+Example:
+git add file1.txt
+git commit -m "Added feature A"
+git commit -am "commit message"
+A shortcut for:
+
+Adding and committing tracked files in one step.
+
+Only works for already tracked files (not new files).
+
+Example:
+git commit -am "Fixed bug in login flow"
+Bonus Tips
+To see remote branches too:
+git branch -a
+To delete a local branch:
+git branch -d branchname
+To see detailed commit history:
+git log --oneline --graph --all
+
+git log --graph --decorate
+This command shows your Git commit history in a visual tree format, with some decorations (branch and tag names).
+
+git log: Shows the commit history.
+
+--graph: Adds an ASCII graph showing the branch and merge history.
+
+--decorate: Shows branch names, tags, and HEAD pointers next to the commit.
+
+Example Output:
+* commit 7d5b6c3 (HEAD -> main, origin/main)
+| Author: Your Name
+| Date:   Sat Apr 13 2025
+|
+|     Added login API
+|
+* commit b1e6f72 (feature-branch)
+| Author: Your Name
+| Date:   Fri Apr 12 2025
+|
+|     Initial commit
+Here:
+
+* indicates a commit
+
+HEAD -> main means you're currently on the main branch
+
+The vertical bars | and slashes / show merges and branches
+
+Useful Add-ons:
+You can combine with --oneline to make it more readable:
+git log --oneline --graph --decorate --all
+This gives you a clean, full tree view of all branches — great for visualizing merges and history.

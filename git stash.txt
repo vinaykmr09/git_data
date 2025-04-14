@@ -1,0 +1,108 @@
+What is Git Stashing?
+git stash temporarily saves (or stashes) changes that you don’t want to commit yet. It’s useful when:
+
+You're working on something half-done.
+
+You want to switch branches.
+
+But you don’t want to lose your changes or commit them yet.
+
+Where do stashed changes go?
+They go into a stash stack — you can later retrieve (pop/apply) them when you're ready.
+
+Git Areas You Should Know:
+Area	Description
+Working Area	Where you edit files (git status shows changes here).
+Staging Area	Where files go after git add (ready to be committed).
+Committed	Files stored in Git history (git commit saves from staging to repository).
+Stash	Temporary storage area where uncommitted changes can be stored and restored.
+Common Stash Commands
+git stash
+Save your uncommitted (working directory + staged) changes:
+git stash
+Save with a message:
+git stash save "WIP: frogs-and-ox"
+View your stash list
+git stash list
+Sample output:
+stash@{0}: WIP on frogs-and-ox: 6d8ab2d added opening paragraph
+stash@{1}: WIP on story-index: fixed typo in title
+Show the contents of a stash
+git stash show stash@{0}
+Add -p to see the diff:
+git stash show -p stash@{1}
+Apply & remove (pop) the latest stash
+git stash pop
+Apply & remove a specific stash
+git stash pop stash@{1}
+Real-world example:
+You're working on a story about “The Frogs and the Ox” in a branch story/frogs-and-ox, but need to switch to master to fix a typo.
+
+Stash current changes:
+git stash
+Switch to master, fix the typo, commit:
+git checkout master
+# Fix typo, then...
+git add .
+git commit -m "Fix typo in story index"
+Switch back to your working branch:
+git checkout story/frogs-and-ox
+Restore stashed changes:
+git stash pop
+What is git reflog?
+git reflog shows all changes to HEAD — including commits, resets, checkouts, etc.
+
+Even if you did reset --hard, you can use git reflog to recover the lost commit.
+git reflog
+Example:
+e2b7a87 HEAD@{0}: reset: moving to HEAD~1
+a1c4f20 HEAD@{1}: commit: add author info
+Then you can restore lost commits:
+git checkout a1c4f20
+Git Porcelain vs Plumbing Commands
+Git has two types of commands:
+
+1. Porcelain Commands (for humans)
+High-level, user-friendly commands you use daily.
+
+Examples:
+
+git status
+
+git commit
+
+git stash
+
+git log
+
+git add
+
+git push
+
+Think: clean interface like a porcelain sink.
+
+2. Plumbing Commands (for scripting/internal use)
+Low-level, detailed commands used in scripts or advanced Git tools.
+
+Examples:
+
+git cat-file
+
+git hash-object
+
+git update-ref
+
+git rev-parse
+
+Think: internal pipes behind the scenes.
+
+Summary of Commands
+Command	Purpose
+git stash	Save uncommitted changes temporarily
+git stash list	See all stashes
+git stash show stash@{n}	Show specific stash changes
+git stash pop	Apply and remove latest stash
+git stash pop stash@{n}	Apply and remove a specific stash
+git reflog	Track history of HEAD movements (useful for recovery)
+git rebase, reset, revert	Modify or undo history in different ways
+Porcelain vs Plumbing	High-level vs low-level commands

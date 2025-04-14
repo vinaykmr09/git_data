@@ -1,0 +1,63 @@
+What is a Merge Conflict?
+A merge conflict happens when:
+
+Two people change the same part of the same file in different branches, and Git can’t automatically decide which change to keep.
+
+Example:
+Max updated line 5 in story.txt and pushed it.
+
+You also updated line 5 in your local story.txt.
+
+When you pull or merge his changes, Git doesn’t know which version to keep — that’s a conflict.
+
+How do you resolve a conflict?
+Git marks the conflict in the file like this:
+<<<<<<< HEAD
+your changes
+=======
+Max's changes
+>>>>>>> origin/master
+You have to manually edit the file, pick the correct content, and then:
+git add filename
+git commit -m "Resolved merge conflict"
+Why do you need to pull before pushing?
+You should always pull before pushing to avoid conflicts.
+
+Here’s why:
+Someone (like Max) might have pushed changes to the master branch.
+
+If you try to push without pulling, your version is out of sync.
+
+Git will reject your push until your branch is synced.
+
+Workflow:
+git pull origin master    # Get latest changes
+# Resolve conflicts if any
+git push origin master    # Now push your changes
+What does this output mean?
+On branch master
+Your branch is ahead of 'origin/master' by 3 commits.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+Explanation:
+You’re on the master branch
+
+You have made 3 local commits that haven’t been pushed yet
+
+nothing to commit → Your local files are already saved and staged
+
+Now you can push safely:
+git push origin master
+What does git log origin/master do?
+This command shows you the commit history of the remote master branch, not your local one.
+
+If your local master is ahead, you’ll see fewer commits in origin/master than in git log.
+
+Quick Recap
+Task	Command	Notes
+Pull remote changes	git pull origin master	Always do this before pushing
+Push local commits	git push origin master	After your branch is up to date
+Check remote commit log	git log origin/master	View remote branch history
+Check your own commit log	git log	See local commits
+Resolve conflicts	Manual edit → git add → git commit	Git can’t always auto-merge

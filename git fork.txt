@@ -1,0 +1,71 @@
+What is a Fork?
+A fork is a personal copy of someone else’s repository on your Git hosting account (like GitHub).
+
+When you fork a repo:
+
+You create a copy of the original repository under your account.
+
+You can make any changes without affecting the original project.
+
+Later, you can request your changes to be merged back.
+
+Used when:
+
+You want to contribute to someone else’s project.
+
+You don’t have direct write access to their repository.
+
+Fork vs Clone
+Action	Meaning
+Fork	Copy someone’s remote repo to your GitHub account
+Clone	Copy a GitHub repo to your local system
+How do unknown people contribute to open-source projects?
+Most open-source projects don’t give direct write access to everyone. Instead, they follow this contribution workflow:
+
+Open Source Contribution Workflow
+Fork the repository
+On GitHub: Click the Fork button at the top-right of the repo page.
+
+Clone your forked repo
+git clone https://github.com/your-username/project-name.git
+cd project-name
+Create a branch for your changes
+
+git checkout -b new-feature
+Make changes
+Edit files, write code, fix bugs, etc.
+
+Commit the changes
+git add .
+git commit -m "Added feature X or fixed bug Y"
+Push the branch to your fork
+
+git push origin new-feature
+Create a Pull Request (PR)
+
+Go to the original repository on GitHub.
+
+Click Compare & pull request.
+
+Explain your changes and submit the PR.
+
+Wait for review and approval
+
+Project maintainers will review your PR.
+
+They may suggest changes or approve it.
+
+Once approved, they merge your changes into the main repository.
+
+Important Terms
+Term	Description
+PR (Pull Request)	A request to merge your changes into the original repo
+Review	Maintainers check your code for bugs, style, and quality
+Merge	Accepted PRs are merged into the project’s main branch
+Contributor	Anyone who contributes to the project, even without full access
+Summary
+Task	Description
+Fork	Create your own copy of the repo on GitHub
+Clone	Copy the repo to your local computer
+Pull Request (PR)	Propose changes to the original repo
+Open Source Work	Fork → Clone → Branch → Code → PR → Review → Merge

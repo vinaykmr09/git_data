@@ -1,0 +1,112 @@
+What is Git Merge?
+git merge is a command used to combine changes from one branch into another. It allows you to integrate features or bug fixes that were worked on in a separate branch into the master (or any other branch you're working on).
+
+When you merge a branch, Git tries to combine the history of both branches, preserving the commits from each. If there are no conflicts, Git will automatically apply the changes. If there are conflicts (where the same parts of the file were changed in both branches), you’ll need to manually resolve them.
+
+Why is Git Merge Required?
+Merging is necessary because in Git, you typically work in isolated branches for different features, fixes, or tasks. Once the work in a branch is finished, you want to integrate those changes back into the main codebase (usually the master branch or a main branch).
+
+This is important because:
+
+It helps you collaborate without interfering with each other's work.
+
+You can work on different features simultaneously, without affecting the stability of the main branch.
+
+It allows you to review and test changes before merging them into the main codebase.
+
+If We Did Git Merge, Then What is the Use of the Old Branch?
+After performing a git merge, the old branch is still useful, but it has served its purpose for now. Here's what happens:
+
+The old branch still exists, and its history is preserved.
+
+You can delete the old branch if you no longer need it.
+
+If you want to continue working on that branch later, you can simply switch back to it (using git checkout old-branch).
+
+In short, the old branch remains available after a merge, but it’s no longer needed for the task you merged.
+
+After Git Merge, Can We Work on the Old Branch?
+Yes, you can continue working on the old branch after merging if you want. The branch is not automatically deleted. Here’s what you can do:
+
+After merging, switch back to the old branch and make further changes:
+git checkout <old-branch>
+However, once merged, it's common to delete the old branch, especially if it’s no longer needed for feature development.
+
+Merge Always to Master Branch?
+No, merges are not limited to the master branch. You can merge into any branch, not just master. The target branch is where the changes from another branch will be integrated.
+
+For example, you could merge a feature branch into a develop or staging branch instead of master. Merging into master is common when you’re ready to release new code or features into the main production codebase.
+
+git merge <branch-name>
+This command is used to merge the changes from the specified branch into the current branch you are on. Here’s how it works:
+
+Make sure you're on the branch where you want to merge changes (usually master or main).
+
+Run the command:
+git merge <branch-name>
+For example, if you want to merge a feature-login branch into master, first switch to the master branch:
+git checkout master
+git merge feature-login
+Git will try to automatically merge the changes. If there are conflicts, you’ll have to resolve them.
+
+How Many Stories (Commits) Are Currently Available in the Master Branch?
+You can check how many commits (stories) are in the master branch by using:
+git rev-list --count master
+This gives the total count of commits in the master branch. Alternatively, you can use git log to see the commit history.
+
+How to Check How Many Commits Are in the Master Branch?
+As mentioned before, use:
+git rev-list --count master
+Or to list the commits:
+git log --oneline master
+List the Files in the Master Branch and Make Sure Both Stories (Commits) Are Visible
+To list the files in the master branch:
+git ls-tree --name-only master
+This will show the files currently in the master branch.
+
+If you want to see the files changed in each commit:
+git log master --name-only
+This will list each commit along with the files that were modified in each commit. You can check for the two stories (commits) and ensure the files from both are visible.
+
+Summary of Git Merge Workflow:
+Create a branch for a new feature or bug fix.
+
+Commit changes on that branch.
+
+Switch to the target branch (usually master).
+
+Use git merge <branch-name> to integrate the changes into master.
+
+Resolve conflicts if necessary.
+
+Once merged, you can continue working on the old branch or delete it.
+
+ Delete a Local Branch
+After you’ve merged a branch (or if the branch is no longer needed), you can delete it locally using:
+
+Delete a Local Branch (that’s not the current branch)
+git branch -d <branch-name>
+-d stands for delete.
+
+This command will only delete the branch if it has been merged into the current branch (usually master or main).
+
+If the branch has unmerged changes and you still want to delete it, use the -D (force delete) option:
+git branch -D <branch-name>
+Example:
+git branch -d feature-login
+If feature-login was successfully merged, this will delete it locally. If not merged yet, you can force the delete using -D like:
+git branch -D feature-login
+Delete a Remote Branch
+If you also need to delete the branch from the remote repository (like GitHub or GitLab), you can use:
+git push origin --delete <branch-name>
+Example:
+git push origin --delete feature-login
+This will delete the feature-login branch from the remote repository.
+
+Check That Branch Is Deleted
+To confirm that the branch has been deleted:
+
+Locally: Run git branch to see the remaining branches.
+
+Remotely: Run git branch -r to see remote branches, or you can fetch updates using git fetch --prune to clean up any remote-tracking branches that no longer exist.
+

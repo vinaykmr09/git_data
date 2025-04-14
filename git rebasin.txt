@@ -1,0 +1,78 @@
+What is Git Rebase?
+Rebasing is a Git operation used to:
+
+Move or combine a sequence of commits to a new base commit.
+
+Create a cleaner, linear commit history (unlike merge which creates "branches").
+
+In simple words:
+git rebase helps you re-write history as if your changes were made on top of the latest commit of another branch (usually master or main).
+
+Why Use Rebase?
+Why use Rebase?	What it helps with
+Clean and readable history	No "merge commits" clutter
+Make sure your feature branch is up to date	Especially before merging into main/master
+Fix messy commit logs	Combine, reorder, rename, or delete commits
+Command Breakdown
+git rebase master
+This rebases your current branch on top of the latest master branch.
+
+Use case:
+You are working on a feature branch feature-x, but master has new commits.
+git checkout feature-x
+git rebase master
+This makes your commits appear as if you started work after the latest commit on master.
+
+git rebase -i HEAD~3
+This opens an interactive rebase for the last 3 commits on your current branch.
+
+You can:
+
+pick (keep as-is)
+
+reword (change commit message)
+
+edit (pause to make changes)
+
+squash (combine commits)
+
+drop (remove a commit)
+
+Example:
+git rebase -i HEAD~3
+You’ll see something like:
+pick 1a2b3c4 Added login page
+pick 2b3c4d5 Fixed login button
+pick 3c4d5e6 Improved login error message
+You can change it to:
+pick 1a2b3c4 Added login page
+squash 2b3c4d5 Fixed login button
+squash 3c4d5e6 Improved login error message
+This will combine all 3 into 1 commit with a custom commit message.
+
+git rebase -i
+Same as above, but you can define how many commits to look back. Use:
+git rebase -i HEAD~N
+Where N = number of commits to look back.
+
+Rebase vs Merge (in short)
+Feature	git merge	git rebase
+History	Keeps all branches and merge commits	Linear and cleaner history
+Conflict Risk	Less, since it keeps history intact	More, since it rewrites history
+Use When	Collaboration, no need for clean history	Cleaning history before pushing
+Important Notes Before Using Rebase
+Never rebase a branch that others are using unless everyone agrees.
+
+Rebase rewrites history, so be careful when working with shared branches.
+
+Always pull with --rebase or rebase your local branch before creating a pull request.
+
+Bonus: Pull with Rebase
+git pull --rebase origin master
+This makes your local commits apply on top of the latest remote commits, just like rebase.
+
+Summary Table
+Command	What It Does
+git rebase master	Replays your branch commits on top of master
+git rebase -i HEAD~3	Opens interactive editor to rewrite last 3 commits
+git rebase -i	Edit history interactively (reorder, squash, drop, etc.)

@@ -1,0 +1,79 @@
+What is Git Reset?
+git reset is used to move the current branch pointer to a different commit. It changes the history and can optionally modify your working directory and staging area.
+
+It's like "rewinding" to a previous commit — optionally keeping or deleting your changes.
+
+There are 3 types of git reset:
+Type	Command Example	What It Does
+--soft	git reset --soft HEAD~1	Moves HEAD to earlier commit, keeps staged & working directory files
+--mixed	git reset --mixed HEAD~1	(default) Removes staging, keeps working directory files
+--hard	git reset --hard HEAD~1	Moves HEAD and deletes all changes since that commit
+What is Git Revert?
+git revert is a safer way to undo changes. It creates a new commit that undoes the effects of a previous commit — preserving history.
+
+It's like "adding an anti-commit" to reverse a change without hiding that it happened.
+
+Example:
+git revert HEAD
+This undoes the last commit and adds a new one that reverses the change.
+
+Summary Table
+Action	Use reset When...	Use revert When...
+Keep history	❌ (reset rewrites history)	✅ (revert keeps history)
+Safe to undo	Only if local, not shared	Yes, safe for public/shared branches
+Typical use	Remove bad commits/branches locally	Undo wrong commits in shared or main branches
+Sarah's Git Story (With Examples)
+Task 1: Sarah adds author names to stories
+This would be done like any edit + commit:
+# Edit each story file to add author name
+git add .
+git commit -m "Added author information to all stories"
+Task 2: Publisher says remove author info — changes must be undone, but history should be preserved
+Use git revert:
+git revert HEAD  # or git revert HEAD~0, same as latest commit
+This adds a new commit that undoes what Sarah did in the last commit.
+
+You can also revert any older commit:
+git log --oneline
+git revert <commit-id>
+What if Sarah wants to undo the commit but keep her changes unstaged?
+Use --soft reset:
+git reset --soft HEAD~1
+This will:
+
+Move HEAD back by 1 commit
+
+Keep changes in staging
+
+NOT lose any work
+
+Task 3: Sarah hates her latest version and wants to completely remove the last 3 commits and their changes — like it never happened.
+Use --hard reset:
+git reset --hard HEAD~3
+Warning: This deletes:
+
+The last 3 commits
+
+All file changes made in those commits
+
+Not recoverable unless you backed up or pushed somewhere
+
+Additional Tips
+How to find a commit like "Finish hare-and-tortoise story"?
+git log --oneline
+Look for:
+a1b2c3d Finish hare-and-tortoise story
+Then reset to that:
+git reset --hard a1b2c3d
+What flag of git reset retains changes?
+--soft
+
+It’s the safest option if you want to remove the commit but keep changes for editing.
+
+Summary of Commands:
+Scenario	Command
+Revert latest commit (preserve history)	git revert HEAD
+Revert specific commit	git revert <commit-id>
+Undo last commit, keep changes	git reset --soft HEAD~1
+Undo all changes and commits completely	git reset --hard HEAD~3
+View commit history	git log --oneline

@@ -1,0 +1,108 @@
+What is git pull?
+git pull is used to fetch and merge changes from a remote repository into your current local branch.
+
+Example:
+git pull origin master
+origin → the name of the remote repository
+
+master → the branch you are pulling from
+
+It combines:
+
+git fetch (downloads the latest code)
+
+git merge (merges it with your local branch)
+
+What is the difference between git pull and git clone?
+Feature	git clone	git pull
+Purpose	Copies the entire remote repo to your system	Syncs latest changes to your local repo
+Use Case	Used once when starting a project	Used often to update code
+Creates Folder	Yes (makes a new project folder)	No (works inside existing repo folder)
+Command	git clone <repo_url>	git pull origin branch-name
+Why shouldn’t Max push directly to the master branch?
+The master (or main) branch should contain:
+
+✅ Final, production-ready code
+
+✅ Code that has been reviewed and approved
+
+✅ No experimental or work-in-progress code
+
+Pushing directly to master skips the review process and can:
+
+Introduce bugs
+
+Break the app for others
+
+Cause conflicts
+
+The Right Workflow (Team Collaboration)
+Pull the latest master code:
+git checkout master
+git pull origin master
+Create a feature branch:
+git checkout -b add-fox-story
+Work on changes and commit:
+git add .
+git commit -m "Added fox and grapes story"
+Push the feature branch to remote:
+git push origin add-fox-story
+Create a Pull Request (PR) / Merge Request (MR) to master
+
+Code is reviewed and approved
+
+Code is merged into master
+
+What is git push <remote_url>?
+This command pushes your local commits to the remote repository at the given URL.
+
+Example:
+git push https://gitlab.com/username/myrepo.git master
+But usually, we use:
+git remote add origin <url>
+git push origin master
+So <remote_url> is typically named origin and reused.
+
+What is a PR (Pull Request)?
+A Pull Request (PR) or Merge Request (MR) is:
+
+A request to merge your changes from one branch (usually a feature branch) into another (usually master or main).
+
+In GitLab:
+You push your branch
+
+Then you click "Create Merge Request"
+
+A PR helps teams:
+
+Review each other's code
+
+Suggest improvements
+
+Catch bugs before merging
+
+What is "Approve"?
+"Approve" means:
+
+A teammate or reviewer has reviewed the code changes in the PR/MR and confirms that it's correct and ready to merge.
+
+You usually need at least one approval before merging to master.
+
+What is "Merge PR request"?
+After a PR is approved, it can be merged — this means:
+
+The changes from your feature branch are added into the master branch
+
+The feature branch can then be deleted
+
+You usually click a button like "Merge" or "Merge after approval" in GitHub or GitLab.
+
+Summary Table
+Term	Meaning
+git pull	Downloads and merges changes from remote branch
+git clone	Creates a full local copy of a remote repository
+Direct Push to Master	Not recommended; should be protected and used only after review
+git push <url>	Push local commits to remote repository at the specified URL
+PR (Pull Request)	A request to merge feature code into master after review
+Approve	Reviewer confirms code is correct and ready
+Merge PR	Combines the feature branch into the master/main branch

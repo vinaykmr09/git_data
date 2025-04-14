@@ -1,0 +1,89 @@
+What is git push to a Remote Repository?
+git push is used to send your local commits (changes) to a remote repository, like GitHub, GitLab, or Bitbucket.
+
+git push <remote-name> <branch-name>
+Example:
+git push origin master
+origin is the name of the remote.
+
+master is the branch you're pushing.
+
+This command updates the remote repository with your latest commits from your local repo.
+
+Try to Commit the Changes
+If you made a change (like adding a new story file), you can commit it like this:
+git add .
+git commit -m "Added fox-and-grapes story"
+But if Git doesn't know who you are, you may get this error:
+Please tell me who you are.
+This means Git needs your identity (username and email) to tag the commit.
+
+Fix Git Identity (Who You Are)
+Tell Git who you are using the following commands:
+git config user.name "Max"
+git config user.email "max@example.com"
+These commands set the name and email for the current repository only.
+
+To set it globally for all repos:
+git config --global user.name "Max"
+git config --global user.email "max@example.com"
+You can check what’s set using:
+git config --list
+How to Create a Git User (in GitLab or GitHub)
+If you’re asking how to create a new user account on platforms like GitLab, GitHub, or Bitbucket:
+
+Go to the website (e.g., https://gitlab.com or https://github.com)
+
+Click Sign Up
+
+Enter your email, username, and password
+
+Confirm your email to activate the account
+
+That’s it — now you have your own Git user account.
+
+What is Collaborate in GitLab?
+Collaboration in GitLab means working with others on the same repository. GitLab supports collaboration by allowing:
+
+Adding members to a project
+
+Assigning roles like Developer, Maintainer, etc.
+
+Using Merge Requests to review and approve changes
+
+To collaborate:
+
+Go to your project in GitLab
+
+Click on Settings > Members
+
+Add the username or email of the person
+
+Assign a role (e.g., Developer or Maintainer)
+
+How to Give Permission to Push to a Remote Repository?
+Only users with certain roles can push changes to a repository.
+
+In GitLab:
+To give someone permission to push:
+
+Open your project
+
+Go to Settings > Members
+
+Add the user with Developer or Maintainer role
+
+Roles in GitLab:
+Role	Can Push	Can Merge	Can Manage Project
+Reporter	❌	❌	❌
+Developer	✅	✅	❌
+Maintainer	✅	✅	✅
+Only Developers and Maintainers can push to branches.
+
+🔁 Quick Summary:
+Task	Command
+Set Git username	git config user.name "Max"
+Set Git email	git config user.email "max@example.com"
+Commit changes	git commit -m "message"
+Push to remote	git push origin master
+Add collaborator in GitLab	Go to Project > Settings > Members

@@ -1,0 +1,59 @@
+What is git cherry-pick?
+git cherry-pick is a command used to copy a specific commit from one branch and apply it to another branch.
+
+It doesn’t bring the entire branch history — it only copies the changes made in the selected commit(s).
+
+Real-life Example:
+Let’s say you fixed a bug in a branch called feature-x, and now you want that exact fix (commit) to appear in master branch without merging the full branch.
+
+You can just:
+git checkout master
+git cherry-pick <commit-hash>
+Command Format
+git cherry-pick <commit-hash>
+You can find commit hashes using:
+git log --oneline
+Step-by-step Example:
+Step 1: Check out the branch you want to apply the commit to
+git checkout master
+
+# Step 2: Cherry-pick the commit from another branch
+git cherry-pick 1a2b3c4
+Now, Git will apply the changes from commit 1a2b3c4 to your current branch (master).
+
+Merge Conflict during Cherry-pick?
+Sometimes cherry-pick results in conflicts, especially if:
+
+The same file was modified in both branches
+
+The context of the commit doesn’t match the target branch
+
+What to do?
+Git will pause and show a conflict:
+error: could not apply 1a2b3c4... Fix bug in auth flow
+Open the conflicted files (e.g. story-index.txt)
+
+Manually resolve the conflict and keep the correct content
+
+After fixing:
+git add <file>
+git cherry-pick --continue
+Undo Cherry-pick
+If you cherry-picked by mistake, you can undo it (if not pushed yet):
+git cherry-pick --abort         # if in middle of cherry-pick
+git reset --hard HEAD~1         # if you want to undo the last cherry-pick commit
+Cherry-pick vs Merge vs Rebase
+Command	Purpose
+merge	Bring all commits from one branch into another
+rebase	Move your branch commits onto another branch
+cherry-pick	Bring specific commit(s) into your branch
+Use Cases of git cherry-pick
+Scenario	Why cherry-pick is useful
+Hotfix	Apply a bug fix from dev to production without merging the whole branch
+Roll forward	Bring a single missing commit into a release
+Isolated change	You only need one commit, not the full feature
+Summary
+Command	Purpose
+git cherry-pick <hash>	Apply a specific commit to current branch
+git cherry-pick --continue	Continue after resolving conflict
+git cherry-pick --abort	Cancel cherry-pick in progress

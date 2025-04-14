@@ -1,0 +1,10 @@
+git branch -a
+This command shows all the branches, both local and remote, in your repository.
+
+git branch -r
+his command shows only the remote branches in your repository.
+
+This command lists all the Git configurations that are currently set, including user name, email, and other settings (e.g., merge tools, remotes, etc.).
+git config --list
+git config user.name "your name"
+git config user.email "your mail id"
